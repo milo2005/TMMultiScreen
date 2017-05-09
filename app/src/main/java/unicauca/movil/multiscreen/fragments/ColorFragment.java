@@ -45,4 +45,10 @@ public class ColorFragment extends Fragment {
         return binding.getRoot();
     }
 
+    public void setColor(int color){
+        if(binding != null){
+            binding.setColor(color);
+        }
+    }
+
 }
