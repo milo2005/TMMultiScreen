@@ -35,6 +35,6 @@ public class MainActivity extends AppCompatActivity {
     void putFragment(int container, Fragment fragment){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(container, fragment);
-        ft.commit()
+        ft.commit();
     }
 }
