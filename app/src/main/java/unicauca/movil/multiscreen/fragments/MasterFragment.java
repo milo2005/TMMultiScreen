@@ -37,14 +37,14 @@ public class MasterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        ViewDataBinding binding = DataBindingUtil.inflate(inflater, R.layout.f_master, container, false);
+        View v =  inflater.inflate(R.layout.f_master, container, false);
+        ViewDataBinding binding = DataBindingUtil.bind(v);
         binding.setVariable(BR.handler, this);
 
         return binding.getRoot();
     }
 
-    public void colorSeleted(int pos){
+    public void colorSelected(int pos){
         selected.onColorSelected(pos);
     }
 

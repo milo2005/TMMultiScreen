@@ -8,9 +8,9 @@ import android.os.Bundle;
 import unicauca.movil.multiscreen.fragments.ColorFragment;
 import unicauca.movil.multiscreen.fragments.MasterFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MasterFragment.ColorSelected {
 
-    boolean port, phone;
+    boolean port, phone, inColor = false;
     MasterFragment master;
     ColorFragment color;
 
@@ -26,15 +26,34 @@ public class MainActivity extends AppCompatActivity {
 
         putFragment(R.id.container1, master);
 
-        if(!phone && !port){
+        if (!phone && !port) {
             putFragment(R.id.container2, color);
         }
 
     }
 
-    void putFragment(int container, Fragment fragment){
+    void putFragment(int container, Fragment fragment) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(container, fragment);
         ft.commit();
+    }
+
+    @Override
+    public void onColorSelected(int pos) {
+        if (phone || port) {
+            color = ColorFragment.instance(pos);
+            putFragment(R.id.container1, color);
+            inColor = true;
+        }
+        color.setColor(pos);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (inColor) {
+            putFragment(R.id.container1, master);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
